@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mymavenapp-deployment
+  labels:
+    app: mymavenapp
+spec:
+  replicas: 3  # Number of pods to run
+  selector:
+    matchLabels:
+      app: mymavenapp
+  template:
+    metadata:
+      labels:
+        app: mymavenapp
+    spec:
+      containers:
+      - name: mymavenapp
+        image: amitha42/javamavenapp:v1  # 
+        ports:
+        - containerPort: 8100
+        env:
+        - name: TOMCAT_HOME
+          value: "/usr/local/tomcat"
+        # Additional environment variables can be added if necessary
