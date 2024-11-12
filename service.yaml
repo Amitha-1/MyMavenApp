@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mymavenapp-service
+spec:
+  selector:
+    app: mymavenapp
+  ports:
+    - protocol: TCP
+      port: 80      # Internal cluster port
+      targetPort: 8100  # Port exposed by your Tomcat container
+  type: ClusterIP
