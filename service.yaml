@@ -7,6 +7,7 @@ spec:
     app: mymavenapp
   ports:
     - protocol: TCP
-      port: 80      # Internal cluster port
-      targetPort: 8100  # Port exposed by your Tomcat container
-  type: ClusterIP
+      port: 80
+      targetPort: 8100
+      nodePort: 30000  # External port
+  type: NodePort
