@@ -1,16 +1,14 @@
-# Start from an official Tomcat image
-FROM tomcat:9.0-jdk11
+# Use official Tomcat image as a base image
+FROM tomcat:9-jdk11-openjdk-slim
 
-# Set environment variables
-ENV CATALINA_HOME /usr/local/tomcat
-ENV PATH $CATALINA_HOME/bin:$PATH
+# Set the working directory inside the container
+WORKDIR /usr/local/tomcat/webapps
 
-# Expose the port where Tomcat will run
+# Copy the war file to Tomcat's webapps folder
+COPY target/MyMavenApp.war /usr/local/tomcat/webapps/MyMavenApp.war
+
+# Expose the port Tomcat will run on (by default, Tomcat runs on 8080)
 EXPOSE 8100
-
-# Copy the WAR file to the Tomcat webapps directory
-# Assuming that `target/MyMavenApp.war` is the output WAR file after building with Maven
-COPY target/MyMavenApp.war $CATALINA_HOME/webapps/MyMavenApp.war
 
 # Start Tomcat server
 CMD ["catalina.sh", "run"]
